@@ -10,8 +10,12 @@
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getPlatformVersion" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
+  if ([@"char" isEqualToString:call.method]) {
+    NSDictionary *dict = call.arguments;
+    NSString *str = dict[@"str"];
+    int asciiCode = [str intValue];
+    NSString *string = [NSString stringWithFormat:@"%C", asciiCode];
+    result(string);
   } else {
     result(FlutterMethodNotImplemented);
   }
